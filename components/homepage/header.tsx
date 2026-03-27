@@ -9,8 +9,8 @@ const navItems = [
   { href: "/", label: "首頁" },
   { href: "/news", label: "最新消息" },
   { href: "/agenda", label: "論壇議程" },
-  { href: "/#location", label: "論壇地點" },
-  { href: "/#footer", label: "關於我們" },
+  { href: "/signup", label: "論壇報名" },
+  { href: "/about", label: "關於我們" },
 ]
 
 export function Header() {

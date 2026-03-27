@@ -15,6 +15,11 @@ export function HashRedirect() {
 
       if (window.location.hash === "#highlights") {
         router.replace("/agenda")
+        return
+      }
+
+      if (window.location.hash === "#location") {
+        router.replace("/about")
       }
     }
 
