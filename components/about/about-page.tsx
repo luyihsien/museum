@@ -11,6 +11,7 @@ const caseStudies = [
     description:
       "2008 年成立、2020 年更新，透過數位科技重新詮釋精選典藏文物，並引入吉祥物互動，打造全年齡參與和世代共融的遊戲空間。",
     href: "https://theme.npm.edu.tw/children/",
+    image: "/about-assets/0image5-3156f6a7dc.png",
   },
   {
     title: "國立歷史博物館兒童創意共學空間",
@@ -18,6 +19,7 @@ const caseStudies = [
     description:
       "將原閱覽空間轉化為以時間為主題的兒童共學空間，透過多感官、多媒體與共讀形式，服務 5-12 歲家庭觀眾。",
     href: "https://event.culture.tw/mocweb/reg/NMH/ExhibitionDetail.init.ctr?actId=40050&utm_source=moc&utm_medium=query&utm_campaign=40050",
+    image: "/about-assets/0image22-5b63efbc48.png",
   },
   {
     title: "臺北市立美術館兒童藝術教育中心",
@@ -25,6 +27,7 @@ const caseStudies = [
     description:
       "以教育計畫為核心規劃主題展示和創作工坊，結合典藏與當代藝術教育思維，創造新的知識生產方式與參與式體驗。",
     href: "https://www.tfam.museum/kid/index.aspx?ddlLang=zh-tw",
+    image: "/about-assets/0image14-cc1e3d14d3.png",
   },
   {
     title: "國立臺灣博物館兒童探索展",
@@ -32,6 +35,7 @@ const caseStudies = [
     description:
       "透過故事、標本、文物與互動裝置，帶領兒童認識臺灣地理環境、多元文化與自然生態，培養理解與尊重。",
     href: "https://event.culture.tw/mocweb/reg/NTM/Detail.init.ctr?actId=00101",
+    image: "/about-assets/0image50-54df929da6.png",
   },
   {
     title: "台北偶戲館",
@@ -39,6 +43,7 @@ const caseStudies = [
     description:
       "透過互動裝置、操作體驗與親子共讀說故事，推廣臺灣及國際偶戲教育，讓觀眾理解並想像偶戲的表演世界。",
     href: "https://www.pact.taipei/index.aspx",
+    image: "/about-assets/0image13-f59d310348.png",
   },
   {
     title: "國立臺灣科學教育館",
@@ -46,6 +51,7 @@ const caseStudies = [
     description:
       "常設展涵蓋生命科學、自然科學、數學與地球科學等主題，結合特展，營造互動、有趣且適合探索的科學藝術基地。",
     href: "https://www.ntsec.gov.tw/",
+    image: "/about-assets/0image47-f73003e88a.jpg",
   },
   {
     title: "國立海洋科技博物館兒童廳",
@@ -53,6 +59,7 @@ const caseStudies = [
     description:
       "以海洋為主題，為 4-8 歲兒童及陪伴者打造自由遊戲與探索空間，透過情境展示與角色扮演探索人與海洋的關係。",
     href: "https://www.nmmst.gov.tw/chhtml/",
+    image: "/about-assets/0image11-332db3937d.png",
   },
   {
     title: "桃園市兒童美術館",
@@ -60,6 +67,7 @@ const caseStudies = [
     description:
       "以兒童參與為核心，從展演、教育推廣、社區參與到專業研究，打造親子友善且具研究視角的藝文空間。",
     href: "https://tmofa.tycg.gov.tw/ch/visit/information/chunglu",
+    image: "/about-assets/0image38-fc3bc78932.jpg",
   },
   {
     title: "國立臺灣美術館臺灣兒童藝術基地",
@@ -67,6 +75,7 @@ const caseStudies = [
     description:
       "以臺灣美術史典藏為基礎，打造 0-12 歲兒童與陪伴者共同探索、學習與創造的基地，鼓勵兒童參與詮釋與創作。",
     href: "https://www.ntmofa.gov.tw/child/cp.aspx?n=1646",
+    image: "/about-assets/0image31-6a3e6324fd.png",
   },
   {
     title: "嘉義市立美術館藝術教育區",
@@ -74,6 +83,7 @@ const caseStudies = [
     description:
       "由學童透過策展工作坊規劃常設展，並依兒童發展條件優化互動與遊具設計，實踐由兒童為兒童設計的場域。",
     href: "https://chiayiartmuseum.chiayi.gov.tw/Visit/AncillarySpace.html",
+    image: "/about-assets/0image3-8f86da73e8.jpg",
   },
   {
     title: "東京玩具美術館",
@@ -81,6 +91,7 @@ const caseStudies = [
     description:
       "由非營利組織經營，強調以玩具探索世界與傳承文化，讓 0-100 歲訪客都能透過遊戲學習與建立社會連結。",
     href: "https://art-play.or.jp/ttm/guide/plan-elementary.html",
+    image: "/about-assets/0image7-f048317f4b.png",
   },
   {
     title: "國際兒童圖書館",
@@ -88,6 +99,7 @@ const caseStudies = [
     description:
       "日本唯一依國立國會圖書館法設立的兒童圖書館，透過豐富資源支持兒童圖書相關活動與研究，以童書連結世界。",
     href: "https://www.kodomo.go.jp/index.html",
+    image: "/about-assets/0image27-6738d93801.jpg",
   },
 ]
 
@@ -133,6 +145,15 @@ export function AboutPage() {
             <p>
               期待與各界並肩前進，一同邁向未知與有趣的未來，讓國家兒童未來館成為社會大眾、家長與兒童相互陪伴學習的所在。
             </p>
+            <div className="pt-4">
+              <Image
+                src="/about-assets/footer_logo_2-b28d497ebf.svg"
+                alt="國家兒童未來館籌備處"
+                width={390}
+                height={90}
+                className="h-auto w-full max-w-[390px]"
+              />
+            </div>
           </SectionCard>
 
           <SectionCard title="執行單位｜國立臺北藝術大學">
@@ -146,7 +167,7 @@ export function AboutPage() {
 
           <SectionCard title="兒童博物館／展廳研究案例">
             <div className="space-y-6">
-              {caseStudies.map((item, index) => (
+              {caseStudies.map((item) => (
                 <article
                   key={item.title}
                   className="grid gap-5 rounded-[1.5rem] border border-stone-200 bg-stone-50 p-4 sm:p-5 lg:grid-cols-[240px_1fr]"
@@ -154,7 +175,7 @@ export function AboutPage() {
                   <div className="overflow-hidden rounded-[1.25rem] bg-white">
                     <div className="relative aspect-[1.25/1]">
                       <Image
-                        src={index % 3 === 0 ? "/placeholder.jpg" : index % 3 === 1 ? "/placeholder-logo.png" : "/placeholder-user.jpg"}
+                        src={item.image}
                         alt={item.title}
                         fill
                         className="object-cover"

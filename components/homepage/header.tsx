@@ -2,6 +2,7 @@
 
 import { useState } from "react"
 import Link from "next/link"
+import Image from "next/image"
 import { Globe2, Menu, X } from "lucide-react"
 import { cn } from "@/lib/utils"
 
@@ -20,13 +21,13 @@ export function Header() {
     <header className="border-b border-stone-200 bg-white/95 backdrop-blur">
       <div className="mx-auto flex max-w-7xl items-center gap-6 px-4 py-4 sm:px-6 lg:px-8">
         <Link href="/" className="shrink-0">
-          <div className="text-stone-900">
-            <p className="text-xs font-medium tracking-[0.24em] text-stone-500">2025</p>
-            <p className="text-sm font-bold leading-tight sm:text-base">國際兒童博物館交流論壇</p>
-            <p className="text-[11px] text-stone-500 sm:text-xs">
-              International Children's Museum Forum
-            </p>
-          </div>
+          <Image
+            src="/index-assets/logo-7ec9dfed69.svg"
+            alt="國際兒童博物館交流論壇"
+            width={300}
+            height={64}
+            className="h-auto w-[180px] sm:w-[220px] lg:w-[250px]"
+          />
         </Link>
 
         <nav className="hidden flex-1 items-center justify-center gap-8 lg:flex">

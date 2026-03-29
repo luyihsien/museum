@@ -1,35 +1,67 @@
+"use client"
+
+import { useState } from "react"
 import Image from "next/image"
 import Link from "next/link"
 import { ChevronLeft, ChevronRight, MapPin } from "lucide-react"
 
 const newsItems = [
   {
-    date: "2025-05-12",
-    title: "【精彩回顧】國際與在地館舍交流，聚焦想像今天與未來",
+    date: "2025-05-21",
+    title: "【倒數1天】「想像國家兒童未來館」即將展開！",
+    href: "http://ncfm2025forum.tnua.edu.tw/news_inside0521.php",
   },
   {
-    date: "2025-05-12",
-    title: "【精華回顧】5/23「未來素養」兒童參與、設計與學習",
+    date: "2025-05-19",
+    title: "【特別來賓】荷蘭阿姆斯特丹世界博物館＆美國華府國家兒童博物館",
+    href: "http://ncfm2025forum.tnua.edu.tw/news_inside0519.php",
   },
   {
-    date: "2025-05-12",
-    title: "【精華回顧】5/23「博物館」創造與共創的年度提案",
+    date: "2025-05-18",
+    title: "【兒少參與】系列分享｜「我是兒童，請聽我說未來」兒童參與行動研究工作坊",
+    href: "http://ncfm2025forum.tnua.edu.tw/news_inside0518.php",
+  },
+  {
+    date: "2025-05-16",
+    title: "【兒少參與】系列分享｜博物館與青少年參與",
+    href: "http://ncfm2025forum.tnua.edu.tw/news_inside0516.php",
+  },
+  {
+    date: "2025-05-13",
+    title: "【兒少參與】系列分享｜博物館與兒童參與",
+    href: "http://ncfm2025forum.tnua.edu.tw/news_inside0513.php",
+  },
+  {
+    date: "2025-05-05",
+    title: "【報名截止】與會者正取、備取名單公告",
+    href: "http://ncfm2025forum.tnua.edu.tw/news_inside0505.php",
   },
 ]
 
 const galleryItems = [
-  { src: "/placeholder.jpg", alt: "論壇活動照片 1" },
-  { src: "/placeholder-logo.png", alt: "論壇活動照片 2" },
-  { src: "/placeholder-user.jpg", alt: "論壇活動照片 3" },
+  { src: "/index-assets/20250522_00-E5-A0-B1-E5-88-B01-58adfd4f2d.jpg", alt: "論壇活動照片 1" },
+  { src: "/index-assets/20250522_02-E6-83-B3-E5-83-8F-E5-9C-8B-E5-AE-B6-E5-85-92-E7-e230b51b25.jpg", alt: "論壇活動照片 2" },
+  { src: "/index-assets/20250522_05-E8-88-87-E6-9C-83-E4-BE-86-E8-B3-931-d3e215aee0.jpg", alt: "論壇活動照片 3" },
 ]
 
-const organizers = [
-  { title: "指導單位", content: "文化部" },
-  { title: "主辦單位", content: "國家兒童未來館籌備處" },
-  { title: "執行單位", content: "博物館與文化推廣團隊" },
-]
+const NEWS_PAGE_SIZE = 3
 
 export function FeatureSection() {
+  const [newsPage, setNewsPage] = useState(0)
+  const newsPageCount = Math.ceil(newsItems.length / NEWS_PAGE_SIZE)
+  const visibleNewsItems = newsItems.slice(
+    newsPage * NEWS_PAGE_SIZE,
+    newsPage * NEWS_PAGE_SIZE + NEWS_PAGE_SIZE,
+  )
+
+  const goPrevNewsPage = () => {
+    setNewsPage((current) => (current === 0 ? newsPageCount - 1 : current - 1))
+  }
+
+  const goNextNewsPage = () => {
+    setNewsPage((current) => (current === newsPageCount - 1 ? 0 : current + 1))
+  }
+
   return (
     <section className="bg-[#f5f2ec]">
       <div className="mx-auto max-w-7xl space-y-12 px-4 py-10 sm:px-6 lg:space-y-16 lg:px-8 lg:py-14">
@@ -44,29 +76,33 @@ export function FeatureSection() {
           <div className="grid gap-4 lg:grid-cols-[auto_1fr_auto] lg:items-center">
             <button
               type="button"
-              className="hidden h-11 w-11 items-center justify-center rounded-full border border-stone-200 bg-white text-stone-400 lg:inline-flex"
-              aria-label="上一則消息"
+              className="hidden h-11 w-11 items-center justify-center rounded-full border border-stone-200 bg-white text-stone-400 transition hover:text-stone-700 lg:inline-flex"
+              aria-label="上一組消息"
+              onClick={goPrevNewsPage}
             >
               <ChevronLeft className="h-5 w-5" />
             </button>
 
             <div className="grid gap-4 md:grid-cols-3">
-              {newsItems.map((item) => (
-                <Link
+              {visibleNewsItems.map((item) => (
+                <a
                   key={item.title}
-                  href="/news"
+                  href={item.href}
+                  target="_blank"
+                  rel="noreferrer"
                   className="block rounded-[1.75rem] bg-white p-6 shadow-sm transition hover:-translate-y-0.5 hover:shadow-md"
                 >
                   <p className="text-xs font-semibold tracking-[0.12em] text-stone-400">{item.date}</p>
                   <h3 className="mt-4 text-base font-bold leading-7 text-stone-800">{item.title}</h3>
-                </Link>
+                </a>
               ))}
             </div>
 
             <button
               type="button"
-              className="hidden h-11 w-11 items-center justify-center rounded-full border border-stone-200 bg-white text-stone-400 lg:inline-flex"
-              aria-label="下一則消息"
+              className="hidden h-11 w-11 items-center justify-center rounded-full border border-stone-200 bg-white text-stone-400 transition hover:text-stone-700 lg:inline-flex"
+              aria-label="下一組消息"
+              onClick={goNextNewsPage}
             >
               <ChevronRight className="h-5 w-5" />
             </button>
@@ -148,18 +184,6 @@ export function FeatureSection() {
             </div>
           </div>
         </section>
-
-        <div className="grid gap-6 border-t border-stone-200 pt-10 text-center md:grid-cols-3 md:text-left">
-          {organizers.map((item) => (
-            <div
-              key={item.title}
-              className="space-y-3 border-stone-200 md:border-r md:pr-6 last:border-r-0 last:pr-0"
-            >
-              <p className="text-sm font-semibold tracking-[0.14em] text-stone-400">{item.title}</p>
-              <p className="text-base font-bold text-stone-700">{item.content}</p>
-            </div>
-          ))}
-        </div>
       </div>
     </section>
   )

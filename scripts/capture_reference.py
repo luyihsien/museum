@@ -35,6 +35,7 @@ def build_asset_name(url: str, content_type: str | None, used_names: set[str]) -
 
     stem = Path(parsed.path).stem or "asset"
     stem = re.sub(r"[^a-zA-Z0-9_-]+", "-", stem).strip("-") or "asset"
+    stem = stem[:60].rstrip("-") or "asset"
     digest = hashlib.sha1(url.encode("utf-8")).hexdigest()[:10]
     candidate = f"{stem}-{digest}{suffix}"
 
