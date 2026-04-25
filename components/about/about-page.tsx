@@ -1,211 +1,361 @@
+"use client"
+
 import Image from "next/image"
 import Link from "next/link"
-import { ExternalLink } from "lucide-react"
-import { Header } from "@/components/homepage/header"
-import { Footer } from "@/components/homepage/footer"
+import { useEffect, useRef, useState } from "react"
+import artEduImage from "@/app/about/ARTEDU.png"
+import artEdu30Image from "@/app/about/藝教30.png"
 
-const caseStudies = [
-  {
-    title: "國立故宮博物院兒童學藝中心",
-    source: "圖片來源：國立故宮博物院官網",
-    description:
-      "2008 年成立、2020 年更新，透過數位科技重新詮釋精選典藏文物，並引入吉祥物互動，打造全年齡參與和世代共融的遊戲空間。",
-    href: "https://theme.npm.edu.tw/children/",
-    image: "/about-assets/0image5-3156f6a7dc.png",
-  },
-  {
-    title: "國立歷史博物館兒童創意共學空間",
-    source: "圖片來源：國立歷史博物館官網",
-    description:
-      "將原閱覽空間轉化為以時間為主題的兒童共學空間，透過多感官、多媒體與共讀形式，服務 5-12 歲家庭觀眾。",
-    href: "https://event.culture.tw/mocweb/reg/NMH/ExhibitionDetail.init.ctr?actId=40050&utm_source=moc&utm_medium=query&utm_campaign=40050",
-    image: "/about-assets/0image22-5b63efbc48.png",
-  },
-  {
-    title: "臺北市立美術館兒童藝術教育中心",
-    source: "圖片來源：臺北市立美術館官網",
-    description:
-      "以教育計畫為核心規劃主題展示和創作工坊，結合典藏與當代藝術教育思維，創造新的知識生產方式與參與式體驗。",
-    href: "https://www.tfam.museum/kid/index.aspx?ddlLang=zh-tw",
-    image: "/about-assets/0image14-cc1e3d14d3.png",
-  },
-  {
-    title: "國立臺灣博物館兒童探索展",
-    source: "圖片來源：國立臺灣博物館官網",
-    description:
-      "透過故事、標本、文物與互動裝置，帶領兒童認識臺灣地理環境、多元文化與自然生態，培養理解與尊重。",
-    href: "https://event.culture.tw/mocweb/reg/NTM/Detail.init.ctr?actId=00101",
-    image: "/about-assets/0image50-54df929da6.png",
-  },
-  {
-    title: "台北偶戲館",
-    source: "圖片來源：台北偶戲館官網",
-    description:
-      "透過互動裝置、操作體驗與親子共讀說故事，推廣臺灣及國際偶戲教育，讓觀眾理解並想像偶戲的表演世界。",
-    href: "https://www.pact.taipei/index.aspx",
-    image: "/about-assets/0image13-f59d310348.png",
-  },
-  {
-    title: "國立臺灣科學教育館",
-    source: "圖片來源：臺灣科學教育館",
-    description:
-      "常設展涵蓋生命科學、自然科學、數學與地球科學等主題，結合特展，營造互動、有趣且適合探索的科學藝術基地。",
-    href: "https://www.ntsec.gov.tw/",
-    image: "/about-assets/0image47-f73003e88a.jpg",
-  },
-  {
-    title: "國立海洋科技博物館兒童廳",
-    source: "圖片來源：海洋科技博物館",
-    description:
-      "以海洋為主題，為 4-8 歲兒童及陪伴者打造自由遊戲與探索空間，透過情境展示與角色扮演探索人與海洋的關係。",
-    href: "https://www.nmmst.gov.tw/chhtml/",
-    image: "/about-assets/0image11-332db3937d.png",
-  },
-  {
-    title: "桃園市兒童美術館",
-    source: "圖片來源：桃園市兒童美術館粉絲專頁",
-    description:
-      "以兒童參與為核心，從展演、教育推廣、社區參與到專業研究，打造親子友善且具研究視角的藝文空間。",
-    href: "https://tmofa.tycg.gov.tw/ch/visit/information/chunglu",
-    image: "/about-assets/0image38-fc3bc78932.jpg",
-  },
-  {
-    title: "國立臺灣美術館臺灣兒童藝術基地",
-    source: "圖片來源：國立臺灣美術館",
-    description:
-      "以臺灣美術史典藏為基礎，打造 0-12 歲兒童與陪伴者共同探索、學習與創造的基地，鼓勵兒童參與詮釋與創作。",
-    href: "https://www.ntmofa.gov.tw/child/cp.aspx?n=1646",
-    image: "/about-assets/0image31-6a3e6324fd.png",
-  },
-  {
-    title: "嘉義市立美術館藝術教育區",
-    source: "圖片來源：嘉義市立美術館",
-    description:
-      "由學童透過策展工作坊規劃常設展，並依兒童發展條件優化互動與遊具設計，實踐由兒童為兒童設計的場域。",
-    href: "https://chiayiartmuseum.chiayi.gov.tw/Visit/AncillarySpace.html",
-    image: "/about-assets/0image3-8f86da73e8.jpg",
-  },
-  {
-    title: "東京玩具美術館",
-    source: "圖片來源：東京玩具美術館官網",
-    description:
-      "由非營利組織經營，強調以玩具探索世界與傳承文化，讓 0-100 歲訪客都能透過遊戲學習與建立社會連結。",
-    href: "https://art-play.or.jp/ttm/guide/plan-elementary.html",
-    image: "/about-assets/0image7-f048317f4b.png",
-  },
-  {
-    title: "國際兒童圖書館",
-    source: "圖片來源：國際兒童圖書館官網",
-    description:
-      "日本唯一依國立國會圖書館法設立的兒童圖書館，透過豐富資源支持兒童圖書相關活動與研究，以童書連結世界。",
-    href: "https://www.kodomo.go.jp/index.html",
-    image: "/about-assets/0image27-6738d93801.jpg",
-  },
+const purposeItems = [
+  "大學專業藝術教育：檢視藝術教育「變與不變」的本質，從藝術家的生涯回顧，延伸至「選才」策略與「育才」的路徑選擇，探討專業藝術人才的培育應如何應對跨領域生涯發展的需要，以及 AI 與創新技術對感官的衝擊。",
+  "中小學藝術教育：正視藝才班的專業訓練與一般學校的普惠教育，透過典範案例尋求在課綱連動、師資職能與數位美感力之間的平衡，落實教學正常化並激發學生自主探究能力。",
+  "社會藝術教育與政策鏈結：強化大學社會責任（USR）與社會實踐，讓藝術專業回饋大眾，並藉由教育政策與文化政策的高峰對話，探討藝術對於社會發展的核心功能。",
 ]
 
-function SectionCard({
+const footerLinks = [
+  { href: "/news", label: "最新消息" },
+  { href: "/about", label: "關於藝教30", active: true },
+  { href: "/agenda", label: "論壇議程" },
+  { href: "/signup", label: "論壇報名" },
+]
+
+function Reveal({
+  children,
+  delay = 0,
+  slow = false,
+  className = "",
+}: {
+  children: React.ReactNode
+  delay?: number
+  slow?: boolean
+  className?: string
+}) {
+  const ref = useRef<HTMLDivElement | null>(null)
+  const [visible, setVisible] = useState(false)
+
+  useEffect(() => {
+    const element = ref.current
+    if (!element) return
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (!entry.isIntersecting) return
+          setVisible(true)
+          observer.disconnect()
+        })
+      },
+      {
+        threshold: 0.18,
+        rootMargin: "0px 0px -10% 0px",
+      },
+    )
+
+    observer.observe(element)
+    return () => observer.disconnect()
+  }, [])
+
+  return (
+    <div
+      ref={ref}
+      className={`${visible ? (slow ? "about-reveal-down-slow" : "about-reveal-down") : "opacity-0"} ${className}`.trim()}
+      style={{ ["--reveal-delay" as string]: `${delay}ms` }}
+    >
+      {children}
+    </div>
+  )
+}
+
+function LineReveal({
+  delay = 0,
+  className = "",
+}: {
+  delay?: number
+  className?: string
+}) {
+  const ref = useRef<HTMLDivElement | null>(null)
+  const [visible, setVisible] = useState(false)
+
+  useEffect(() => {
+    const element = ref.current
+    if (!element) return
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (!entry.isIntersecting) return
+          setVisible(true)
+          observer.disconnect()
+        })
+      },
+      {
+        threshold: 0.18,
+        rootMargin: "0px 0px -10% 0px",
+      },
+    )
+
+    observer.observe(element)
+    return () => observer.disconnect()
+  }, [])
+
+  return (
+    <div
+      ref={ref}
+      className={`${visible ? "about-line-drop" : "opacity-0"} ${className}`.trim()}
+      style={{ ["--reveal-delay" as string]: `${delay}ms` }}
+    >
+      <span className="block h-full w-full bg-white" />
+    </div>
+  )
+}
+
+function SectionRow({
   title,
   children,
+  delay = 0,
 }: {
   title: string
   children: React.ReactNode
+  delay?: number
 }) {
   return (
-    <section className="rounded-[2rem] border border-stone-200 bg-white px-6 py-8 shadow-sm sm:px-8 lg:px-10">
-      <h2 className="text-2xl font-black text-stone-900">{title}</h2>
-      <div className="mt-5 space-y-4 text-[15px] leading-8 text-stone-700">{children}</div>
+    <section className="mx-auto grid max-w-[980px] gap-8 px-6 lg:grid-cols-[120px_2px_minmax(0,1fr)] lg:px-0">
+      <Reveal delay={delay} slow>
+        <h2 className="text-[22px] font-medium tracking-tight text-white">{title}</h2>
+      </Reveal>
+      <LineReveal delay={delay + 420} className="hidden lg:block" />
+      <Reveal delay={delay + 140}>
+        <div className="max-w-[610px] text-[15px] leading-8 text-white/95">{children}</div>
+      </Reveal>
     </section>
   )
 }
 
 export function AboutPage() {
   return (
-    <div className="min-h-screen bg-[#f8f4ed] text-stone-900">
-      <Header />
+    <div className="min-h-screen bg-[#171717] text-white">
+      <header className="bg-[#171717]">
+        <div className="mx-auto grid max-w-[980px] grid-cols-1 gap-5 px-6 py-7 lg:grid-cols-[1fr_auto_1fr] lg:items-center">
+          <div className="hidden lg:block" />
 
-      <main className="mx-auto max-w-7xl px-4 py-10 sm:px-6 lg:px-8 lg:py-14">
-        <div className="mb-8 flex flex-wrap items-end justify-between gap-4">
-          <div>
-            <p className="text-sm font-semibold tracking-[0.18em] text-sky-600">About The Forum</p>
-            <h1 className="mt-2 text-3xl font-black tracking-tight sm:text-4xl">關於我們</h1>
-          </div>
-          <Link
-            href="/"
-            className="rounded-full border border-stone-200 px-4 py-2 text-sm font-semibold text-stone-600 transition hover:border-sky-300 hover:text-sky-700"
-          >
-            回到首頁
+          <Link href="/" className="mx-auto text-center">
+            <Image
+              src={artEduImage}
+              alt="ARTEDU"
+              priority
+              className="mx-auto h-auto w-[160px] sm:w-[190px]"
+            />
           </Link>
-        </div>
 
-        <div className="space-y-8">
-          <SectionCard title="主辦單位｜國家兒童未來館籌備處">
+          <div className="flex flex-col gap-4 lg:items-end lg:justify-self-end">
+            <nav className="flex flex-wrap items-center justify-center gap-x-5 gap-y-2 text-sm font-medium text-white/80">
+              <Link href="/" className="transition hover:text-[#ffc127]">
+                回首頁
+              </Link>
+              <Link href="/news" className="transition hover:text-[#ffc127]">
+                最新消息
+              </Link>
+              <Link href="/agenda" className="transition hover:text-[#ffc127]">
+                論壇議程
+              </Link>
+              <Link href="/signup" className="transition hover:text-[#ffc127]">
+                論壇報名
+              </Link>
+            </nav>
+
+            <Link
+              href="/signup"
+              className="mx-auto rounded-md bg-[#ffc127] px-8 py-3 text-xl font-black text-black shadow-[6px_6px_0_0_#171717] transition hover:translate-y-[1px] lg:mx-0"
+            >
+              立即報名
+            </Link>
+          </div>
+        </div>
+      </header>
+
+      <main className="bg-[#171717]">
+        <section className="px-6 pb-16 pt-8">
+          <div className="mx-auto max-w-[980px] text-center">
+            <Reveal delay={0}>
+              <div className="mx-auto max-w-[320px]">
+                <Image
+                  src={artEdu30Image}
+                  alt="藝教30"
+                  priority
+                  className="mx-auto h-auto w-[260px] sm:w-[330px]"
+                />
+              </div>
+            </Reveal>
+
+            <Reveal delay={180} slow>
+              <h1 className="mx-auto mt-14 max-w-[980px] text-[42px] font-light tracking-tight text-white sm:text-[64px]">
+                共構臺灣藝術教育方程式
+              </h1>
+            </Reveal>
+          </div>
+        </section>
+
+        <div className="space-y-20 pb-20">
+          <SectionRow title="論壇緣起" delay={240}>
             <p>
-              為籌建臺灣首座專屬兒童的國家級館所「國家兒童未來館」，將以探索、冒險和玩樂為核心理念，啟發孩童五感與學習力，培養其適應環境的未來能力與信心。
+              在《藝術教育法》施行將屆三十年之際，臺灣藝術教育正站在關鍵的轉折點。面對少子化、科技快速發展、
+              AI 與數位媒體全面滲透，以及社會結構與文化生態的深刻變化，藝術教育不再是專業人才的培育路徑，
+              更關乎全民素養、文化永續與社會創新的核心基礎。本論壇以「對於未來臺灣藝術教育的想像：以提升全民素養為目標的人才培育」
+              為總體願景，嘗試從歷史回顧、現況分析到未來前瞻，重新思考藝術教育在臺灣社會中的角色與功能。
             </p>
-            <p>
-              期待與各界並肩前進，一同邁向未知與有趣的未來，讓國家兒童未來館成為社會大眾、家長與兒童相互陪伴學習的所在。
+            <p className="mt-4">
+              透過大學專業藝術教育、中小學藝術教育、社會藝術教育三大面向，串聯學校體系、社會場域與文化政策，
+              邀集不同教育階段、藝術領域與實務現場的關鍵實踐者，系統性檢視過去三十年藝術教育的成果與限制，
+              並回應當前教育與文化環境所面臨的結構性挑戰。藉由典範經驗分享、跨領域對話與政策層級的高峰討論，
+              論壇不僅聚焦於選才與育才等傳統議題，更進一步探討藝術教育如何回應跨領域學習，以及科技與文化創意產業的交織影響。
             </p>
-            <div className="pt-4">
-              <Image
-                src="/about-assets/footer_logo_2-b28d497ebf.svg"
-                alt="國家兒童未來館籌備處"
-                width={390}
-                height={90}
-                className="h-auto w-full max-w-[390px]"
+            <p className="mt-4">
+              最終，本論壇期望建構一個面向未來的「臺灣藝術教育方程式」，促進教育政策與文化政策之間更緊密的協作，
+              並為未來藝術教育的制度創新、人才培育與全民藝術素養奠定共同的想像基礎與行動方向。
+            </p>
+          </SectionRow>
+
+          <Reveal delay={640} className="px-6">
+            <div className="mx-auto max-w-[656px] bg-white p-3">
+              <img
+                src="https://static.wixstatic.com/media/a3e028_71d4f338f1e64e17876029190369ec57~mv2.png/v1/fill/w_656,h_459,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/a3e028_71d4f338f1e64e17876029190369ec57~mv2.png"
+                alt="臺灣藝術教育未來的期待與想像"
+                className="block h-auto w-full"
               />
             </div>
-          </SectionCard>
+          </Reveal>
 
-          <SectionCard title="執行單位｜國立臺北藝術大學">
+          <SectionRow title="論壇目的" delay={780}>
             <p>
-              論壇由本校博物館研究所黃貞燕老師、藝術與人文教育研究所吳岱融老師、國立臺灣科學教育館展覽組林怡萱主任共同規劃，是文化部委託「推動國家兒童未來館資源建置計畫（第一期）」任務之一。
+              自1997 年《藝術教育法》頒布至今，臺灣藝術教育已經從「專業人才培育」邁向「全民美感提升」的深度轉型。
+              近三十年來，《藝術教育法》提供政策支持，支撐起臺灣藝術家的養成系統，創造無數享譽海內外的藝術創作者和藝術行政工作者，
+              提供豐富多元的藝術創作與展演活動；連結不同體系的藝術教育架構，讓藝術鑑賞與美感能力逐漸成為臺灣社會追求精神富足的基石。
             </p>
-            <p>
-              本計畫從重視兒童權利與兒童參與出發，聯手關心兒童與未來的實踐者，以藝術性與開放性的思維，透過遊戲、探索與學習，和兒童一起認識自己、認識臺灣、認識世界。
+            <p className="mt-4">
+              然而，面對少子化、AI 科技全面滲透以及社會與文化生態質變，藝術教育正處於關鍵轉折點。本次論壇透過三大系統性面向，
+              深度審思現況並展望前瞻：
             </p>
-          </SectionCard>
-
-          <SectionCard title="兒童博物館／展廳研究案例">
-            <div className="space-y-6">
-              {caseStudies.map((item) => (
-                <article
-                  key={item.title}
-                  className="grid gap-5 rounded-[1.5rem] border border-stone-200 bg-stone-50 p-4 sm:p-5 lg:grid-cols-[240px_1fr]"
-                >
-                  <div className="overflow-hidden rounded-[1.25rem] bg-white">
-                    <div className="relative aspect-[1.25/1]">
-                      <Image
-                        src={item.image}
-                        alt={item.title}
-                        fill
-                        className="object-cover"
-                      />
-                    </div>
-                  </div>
-                  <div className="space-y-3">
-                    <div className="flex flex-wrap items-center gap-3">
-                      <h3 className="text-lg font-bold text-stone-900">{item.title}</h3>
-                      <a
-                        href={item.href}
-                        target="_blank"
-                        rel="noreferrer"
-                        className="inline-flex items-center gap-1 text-sm font-semibold text-sky-600 hover:text-sky-700"
-                      >
-                        外部連結
-                        <ExternalLink className="h-4 w-4" />
-                      </a>
-                    </div>
-                    <p className="text-sm text-stone-500">{item.source}</p>
-                    <p className="text-sm leading-7 text-stone-700">{item.description}</p>
-                  </div>
-                </article>
+            <ul className="mt-4 list-disc space-y-3 pl-6">
+              {purposeItems.map((item) => (
+                <li key={item}>{item}</li>
               ))}
-            </div>
-          </SectionCard>
+            </ul>
+            <p className="mt-6">
+              結語：建構未來的「臺灣藝術教育方程式」。藉由典範經驗分享與跨領域深度對話，本論壇將促成教育政策與文化政策的「雙軌並行」，
+              建構面向未來的「臺灣藝術教育方程式」，將過去三十年的豐碩成果轉化為前行動力。這不僅為了制度創新與育才，
+              更是為了在全球化的數位浪潮中，為臺灣社會奠定充滿創造力、人性溫度與社會韌性的行動藍圖，共同擘劃下一個三十年的藝術盛世。
+            </p>
+          </SectionRow>
         </div>
+
+        <section className="bg-[#f5f5f3] px-6 py-20 text-black">
+          <div className="mx-auto max-w-[980px]">
+            <Reveal delay={0} slow>
+              <h2 className="text-center text-[48px] font-light tracking-tight sm:text-[60px]">
+                主辦/執行單位
+              </h2>
+            </Reveal>
+
+            <div className="mt-16 grid gap-12 lg:grid-cols-[340px_minmax(0,1fr)] lg:items-center">
+              <Reveal delay={180} className="flex justify-center">
+                <div className="flex h-[310px] w-[310px] items-center justify-center rounded-full border-[3px] border-black bg-white">
+                  <div className="text-center">
+                    <div className="text-[28px] font-serif tracking-[0.08em]">MINISTRY OF EDUCATION</div>
+                    <div className="mt-6 text-[72px]">教育部</div>
+                  </div>
+                </div>
+              </Reveal>
+
+              <Reveal delay={320} slow>
+                <div className="space-y-4 text-[15px] leading-8 text-stone-800">
+                  <p>教育部序文簡介 教育部序文簡介 教育部序文簡介 教育部序文簡介 教育部序文簡介 教育部序文簡介。</p>
+                  <p>教育部序文簡介 教育部序文簡介 教育部序文簡介 教育部序文簡介 教育部序文簡介 教育部序文簡介。</p>
+                  <p>教育部序文簡介 教育部序文簡介 教育部序文簡介 教育部序文簡介 教育部序文簡介 教育部序文簡介。</p>
+                  <p>教育部序文簡介 教育部序文簡介 教育部序文簡介 教育部序文簡介 教育部序文簡介 教育部序文簡介。</p>
+                  <p>教育部序文簡介 教育部序文簡介 教育部序文簡介 教育部序文簡介 教育部序文簡介 教育部序文簡介。</p>
+                </div>
+              </Reveal>
+            </div>
+
+            <div className="mt-14 grid gap-12 lg:grid-cols-[340px_minmax(0,1fr)] lg:items-end">
+              <Reveal delay={460} slow>
+                <div className="space-y-3 text-[15px] leading-8 text-stone-800">
+                  <p>執行單位引文簡介 執行單位引文簡介 執行單位引文簡介 執行單位引文簡介 執行單位引文簡介。</p>
+                  <p>執行單位引文簡介 執行單位引文簡介 執行單位引文簡介 執行單位引文簡介 執行單位引文簡介。</p>
+                  <p>執行單位引文簡介 執行單位引文簡介 執行單位引文簡介 執行單位引文簡介 執行單位引文簡介。</p>
+                  <p>執行單位引文簡介 執行單位引文簡介 執行單位引文簡介 執行單位引文簡介 執行單位引文簡介。</p>
+                </div>
+              </Reveal>
+
+              <Reveal delay={600} className="flex items-center justify-center lg:justify-start">
+                <div>
+                  <div className="text-[62px] font-semibold tracking-[0.16em] text-black">國立臺北藝術大學</div>
+                  <div className="mt-1 text-[28px] text-stone-700">Taipei National University of the Arts</div>
+                </div>
+              </Reveal>
+            </div>
+          </div>
+        </section>
+
+        <section className="relative overflow-hidden bg-[#f5f5f3] px-6 pb-24 pt-16">
+          <div className="absolute inset-x-0 bottom-0 h-[420px] rounded-t-[50%] bg-[#ffc127]" />
+          <div className="relative mx-auto flex max-w-[980px] justify-center">
+            <Reveal delay={0}>
+              <Link
+                href="/signup"
+                className="rounded-lg bg-[#171717] px-12 py-5 text-[24px] font-black tracking-[0.12em] text-white shadow-[6px_6px_0_0_#ffc127]"
+              >
+                立即報名
+              </Link>
+            </Reveal>
+          </div>
+        </section>
       </main>
 
-      <Footer />
+      <footer className="bg-[#171717] px-6 py-16 text-white">
+        <div className="mx-auto grid max-w-[980px] gap-10 lg:grid-cols-[230px_160px_1fr]">
+          <Reveal delay={0}>
+            <div>
+              <Image
+                src={artEdu30Image}
+                alt="藝教30"
+                className="h-auto w-[190px]"
+              />
+            </div>
+          </Reveal>
+
+          <Reveal delay={140} slow>
+            <nav className="space-y-3 text-[15px]">
+              {footerLinks.map((item) => (
+                <div key={item.href}>
+                  <Link
+                    href={item.href}
+                    className={item.active ? "text-[#ff8c2a]" : "text-white"}
+                  >
+                    {item.label}
+                  </Link>
+                </div>
+              ))}
+            </nav>
+          </Reveal>
+
+          <Reveal delay={280} slow>
+            <div className="grid gap-6 sm:grid-cols-[140px_1fr]">
+              <div className="flex items-start gap-4 pt-1 text-4xl text-white/75">
+                <span>◎</span>
+                <span>f</span>
+                <span>▶</span>
+              </div>
+              <div className="space-y-2 text-[15px] leading-8 text-white/95">
+                <p>國立臺北藝術大學</p>
+                <p>The Taipei National University of the Arts</p>
+                <p className="pt-4">Email：</p>
+                <p>Tel：</p>
+              </div>
+            </div>
+          </Reveal>
+        </div>
+      </footer>
     </div>
   )
 }
